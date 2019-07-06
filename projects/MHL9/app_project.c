@@ -9,7 +9,6 @@
  ******************************************************************************/
 #include "app.h"
 #include "app_at.h"
-#include "app_mac.h"
 #include "at/at_config.h"
 #include "radio/sx127x/sx127x_common.h"
 #include "mac/node/mac_radio.h"
@@ -123,6 +122,9 @@ bool AppTaskCreate(void)
 void AppTaskExtends(void)
 {
     uint32_t status = AT_STATUS_NONE;
+
+    Dev_GetVol();
+
     while (1) {
         APP_FeedDog();
 #ifdef USE_MODE_RX
@@ -138,7 +140,8 @@ void AppTaskExtends(void)
         }
         osDelayMs(1);
 #else
-        status = MacRadio_TxProcess("TEST0123456789\r\n", strlen("TEST0123456789\r\n"));
+        /* status = MacRadio_TxProcess("TEST0123456789\r\n", strlen("TEST0123456789\r\n"), Dev_GetVol); */
+        status = MacRadio_TxProcess("TEST0123456789\r\n", strlen("TEST0123456789\r\n"), NULL);
         PlatformSleep(2);
 #endif
     }
