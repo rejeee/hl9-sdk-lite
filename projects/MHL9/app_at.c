@@ -19,9 +19,15 @@ Global Variables
 /****
 Global Functions
 ****/
-void AT_Printf(const char *str, size_t len)
+void AT_Printf(const char *str)
 {
-    UserDebugWrite((uint8_t *)str, len);
+    UserDebugWrite((uint8_t *)str, strlen(str));
+    return;
+}
+
+void AT_LOG(const uint8_t *ptr, size_t len)
+{
+    UserDebugWrite(ptr, len);
     return;
 }
 

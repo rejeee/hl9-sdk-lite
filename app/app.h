@@ -15,8 +15,6 @@ Include Files
 ****/
 #include "platform/platform.h"
 
-#define APP_FeedDog()
-
 /****
 Global Functions
 ****/
