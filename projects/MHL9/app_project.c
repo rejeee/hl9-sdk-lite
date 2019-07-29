@@ -2,7 +2,7 @@
  * @file    app_project.c
  * @brief   Project application interface
  *
- * @version 0.0.1
+ * @version 1.0.0
  *******************************************************************************
  * @license Refer License or other description Docs
  * @author  Felix
@@ -16,7 +16,7 @@
 
 volatile bool   gEnableRadioRx  = true;
 
-char *gCodeVers = "1017";
+char *gCodeVers = "1018";
 
 /****
 Local Variables
@@ -79,9 +79,9 @@ static bool AppTaskInit(void)
     gDevFlash.config.rxfreq = 475500000;
     gDevFlash.config.txsf = RF_SF_12;
     gDevFlash.config.rxsf = RF_SF_12;
-    gDevFlash.config.tiq = 0;
-    gDevFlash.config.riq = 0;
-    gDevFlash.config.netmode = NET_MODE_NONE;
+    gDevFlash.config.rps.tiq = 0;
+    gDevFlash.config.rps.riq = 0;
+    gDevFlash.config.prop.netmode = NET_MODE_NONE;
 
     return result;
 }
@@ -107,9 +107,9 @@ bool AppTaskCreate(void)
         return false;
     }
 
-    success = UserDebugInit(false, gDevFlash.config.baudrate, gDevFlash.config.pari);
+    success = UserDebugInit(false, gDevFlash.config.prop.bdrate, gDevFlash.config.prop.pari);
 
-    printk("LoRa %s SDK, HAL V%u:%u, XTL:%d, Firmware V%s\r\n", MODULE_NAME,
+    printk("LoRa %s SDK-Lite, HAL V%u:%u, XTL:%d, Firmware V%s\r\n", MODULE_NAME,
            RADIO_HAL_VERSION, AT_VER, gParam.dev.extl, gCodeVers);
 
     if(success) {

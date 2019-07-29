@@ -2,7 +2,7 @@
  * @file    platform_mhl9.c
  * @brief   The HL9 platform interface implementation
  *
- * @version 0.0.1
+ * @version 1.0.0
  *******************************************************************************
  * @license Refer License or other description Docs
  * @author  Felix
@@ -102,13 +102,15 @@ void UserExternalGPIO(bool enable)
 
 bool UserDebugInit(bool reinit, uint32_t baudrateType, uint8_t pariType)
 {
+    bool success = false;
+
     BSP_UART_TypeDef uart = {
         .cb = DebugCallback,
-        .tx_port = DBG_TX_GPIO,
+        .gpio = DBG_GPIO,
         .tx_pin = DBG_TX_PIN,
-        .rx_port = DBG_RX_GPIO,
         .rx_pin = DBG_RX_PIN,
         .af = DBG_AF,
+        .pd = GpioPu,
         .num = DBG_UART_NUM,
         .bdtype = baudrateType,
         .pri = pariType
@@ -175,7 +177,7 @@ void DevCfg_Display(void)
         break;
     }
 
-    switch(gDevFlash.config.lowRate){
+    switch(gDevFlash.config.rps.lowRate){
     case LOWRATE_OP_AUTO:
         ldrstr ="AUTO";
         break;
@@ -190,7 +192,7 @@ void DevCfg_Display(void)
         break;
     }
 
-    switch(gDevFlash.config.pari){
+    switch(gDevFlash.config.prop.pari){
     case UART_PARI_EVEN:
         parstr = "Even";
         break;
@@ -212,33 +214,34 @@ void DevCfg_Display(void)
             txpow = 2;
         }
     }
-
     osSaveCritical();
     osEnterCritical();
     printk("NET:\t%s\r\nTFREQ:\t%0.1fMHz\r\nRFREQ:\t%0.1fMHz\r\n",
-           gDevFlash.config.netmode ? "Node to Gateway":"Node to Node",
+           gDevFlash.config.prop.netmode ? "Node to Gateway":"Node to Node",
            (float)(freq/1e6),(float)(gDevFlash.config.rxfreq/1e6));
     printk("POW:\t%udBm\r\nBW:\t%s\r\n"
            "TSF:\t%u\r\nRSF:\t%u\r\nCR:\t4/%u\r\nMODE:\t%s\r\nSYNC:\t0x%X\r\n",
            txpow,bwstr,
            gDevFlash.config.txsf,gDevFlash.config.rxsf,rps.cr + 4,
-           gDevFlash.config.modem?"LORA":"FSK",
+           gDevFlash.config.rps.modem?"LORA":"FSK",
            gDevFlash.config.syncword);
     printk("PREM:\t%u,%u\r\nFIX:\t%u,%u\r\nCRC:\t%s\r\nTIQ:\t%s\r\nRIQ:\t%s\r\n",
            gDevFlash.config.tprem,gDevFlash.config.rprem,
            gDevFlash.config.tfix,gDevFlash.config.rfix,
            rps.crc?"ON":"OFF",
-           gDevFlash.config.tiq?"ON":"OFF",
-           gDevFlash.config.riq?"ON":"OFF");
+           gDevFlash.config.rps.tiq?"ON":"OFF",
+           gDevFlash.config.rps.riq?"ON":"OFF");
     printk("SEQ:\t%s\r\nIP:\t%s\r\nAES:\t%s\r\nACK:\t%s\r\n"
            "LDR:\t%s\r\nPAR:\t%s\r\n"
-           "LCP:\t%u\r\nLFT:\t%u\r\nTYPE:\t0x%02X\r\n",
-           gDevFlash.config.seqMode?"ON":"OFF",
-           gDevFlash.config.ipMode?"ON":"OFF",
+           "LCP:\t%u\r\nLFT:\t%u\r\nFNB:\t0x%02X\r\nTYPE:\t0x%02X\r\n",
+           gDevFlash.config.prop.seqMode?"ON":"OFF",
+           gDevFlash.config.prop.ipMode?"ON":"OFF",
            notAes?"OFF":"ON",
-           gDevFlash.config.ack?"ON":"OFF",ldrstr,parstr,
+           gDevFlash.config.prop.ack?"ON":"OFF",ldrstr,parstr,
            gDevFlash.config.lcp, gDevFlash.config.lftime,
+           gDevFlash.config.fnb,
            gDevFlash.config.dtype);
+
     osExitCritical();
     return;
 }

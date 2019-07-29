@@ -11,10 +11,9 @@ extern "C" {
  *  Debug Port Settings
  */
 #define DBG_UART_NUM            BSP_LPUART0
-#define DBG_TX_GPIO             GpioPortB   /* TX: PB00 */
-#define DBG_TX_PIN              GpioPin0
-#define DBG_RX_GPIO             GpioPortB   /* RX: PB11 */
-#define DBG_RX_PIN              GpioPin11
+#define DBG_GPIO                GpioPortB
+#define DBG_TX_PIN              GpioPin0    /* TX: PB00 */
+#define DBG_RX_PIN              GpioPin11   /* RX: PB11 */
 #define DBG_AF                  GpioAf3
 
 /* AT mode select, PB07 */
