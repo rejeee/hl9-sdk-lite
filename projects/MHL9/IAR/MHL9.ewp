@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>HC32L130F8UA	HDSC HC32L130F8UA</state>
+          <state>Default	None</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -149,7 +149,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>HC32L130F8UA	HDSC HC32L130F8UA</state>
+          <state>Default	None</state>
         </option>
         <option>
           <name>FPU2</name>
@@ -318,7 +318,6 @@
           <state>$PROJ_DIR$\..\..\..\kernel\CMSIS\Include</state>
           <state>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\INC</state>
           <state>$PROJ_DIR$\..\..\..\bsp</state>
-          <state>$PROJ_DIR$\..\..\..\bsp\cpu</state>
           <state>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC</state>
           <state>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC\HC32L13X</state>
           <state>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC\HC32L13X\driver\inc</state>
@@ -787,7 +786,7 @@
         </option>
         <option>
           <name>IlinkAdditionalLibs</name>
-          <state>$PROJ_DIR$\..\..\..\libs\rjhl9-lite.a</state>
+          <state>$PROJ_DIR$\..\..\..\libs\rjhl9.a</state>
         </option>
         <option>
           <name>IlinkOverrideProgramEntryLabel</name>
@@ -1062,7 +1061,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>HC32L130F8UA	HDSC HC32L130F8UA</state>
+          <state>Default	None</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -1122,7 +1121,7 @@
         </option>
         <option>
           <name>GFPUDeviceSlave</name>
-          <state>HC32L130F8UA	HDSC HC32L130F8UA</state>
+          <state>Default	None</state>
         </option>
         <option>
           <name>FPU2</name>
@@ -1292,10 +1291,10 @@
           <state>$PROJ_DIR$\..\..\..\kernel\CMSIS\Include</state>
           <state>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\INC</state>
           <state>$PROJ_DIR$\..\..\..\bsp</state>
-          <state>$PROJ_DIR$\..\..\..\bsp\cpu</state>
           <state>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC</state>
           <state>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC\HC32L13X</state>
           <state>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC\HC32L13X\driver\inc</state>
+          <state>$PROJ_DIR$\..\..\..\bsp\platform</state>
           <state>$PROJ_DIR$\..\..\..\bsp\platform\common</state>
           <state>$PROJ_DIR$\..\..\..\libs</state>
           <state>$PROJ_DIR$\..\..\..\app</state>
@@ -1760,7 +1759,7 @@
         </option>
         <option>
           <name>IlinkAdditionalLibs</name>
-          <state>$PROJ_DIR$\..\..\..\libs\rjhl9-lite.a</state>
+          <state>$PROJ_DIR$\..\..\..\libs\rjhl9.a</state>
         </option>
         <option>
           <name>IlinkOverrideProgramEntryLabel</name>

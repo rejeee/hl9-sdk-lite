@@ -14,9 +14,13 @@
 #include "mac/node/mac_radio.h"
 #include "mac/node/mac_api.h"
 
-volatile bool   gEnableRadioRx  = true;
+/****
+Global Variables
+****/
 
+/* Code Version */
 char *gCodeVers = "1018";
+volatile bool   gEnableRadioRx  = true;
 
 /****
 Local Variables
