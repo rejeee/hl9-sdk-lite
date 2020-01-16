@@ -20,7 +20,7 @@ Include Files
 /** @name AT command version */
 /*@{*/
 /** @brief AT command version */
-#define AT_VER                          5
+#define AT_VER                          9
 /*@}*/
 
 /** @brief AT OK response */
@@ -30,7 +30,7 @@ Include Files
 #define AT_CMD_MIN_LEN                  4U
 
 /** @brief AT command maximal length */
-#define AT_CMD_MAX_LEN                  255U
+#define AT_CMD_MAX_LEN                  512U
 
 /** @brief AT command max prefix length, example AT+XXXX= */
 #define AT_CMD_PREFIX_LEN               10U
@@ -38,32 +38,13 @@ Include Files
 /** @brief AT command max parameter length, example AT+AK= XXXX */
 #define AT_CMD_PARAM_LEN                32U
 
-/*! @brief the byte length of AT parameter. */
+/** @brief the byte length of AT parameter. */
 enum {
     CFG_1BYTE_LEN  = 1U,    /**< 1 Byte  */
     CFG_2BYTE_LEN  = 2U,    /**< 2 Byte  */
     CFG_4BYTE_LEN  = 4U,    /**< 4 Byte  */
     CFG_8BYTE_LEN  = 8U,    /**< 8 Byte  */
     CFG_16BYTE_LEN = 16U    /**< 16 Byte */
-};
-
-/*! @brief the AT enable type for diffrence device. */
-typedef enum
-{
-    AT_EN_ALL       = 0xFF,
-    AT_EN_NODE      = 0x01,
-    AT_EN_NODE_TX   = 0x02,
-    AT_EN_GW81      = 0x04,
-    AT_EN_GWX3      = 0x08
-} AT_EN_TYPE;
-
-enum {
-    DATA_TYPE_SIMPLE = 0,
-    DATA_TYPE_TLV,
-    DATA_TYPE_FRAME,
-    DATA_TYPE_JSON,
-    DATA_TYPE_TLV_OLD,
-    DATA_TYPE_NUM
 };
 
 enum {
@@ -122,8 +103,6 @@ typedef enum
     AT_STATUS_RX_MODE           /**< need change RX printf style */
 } AT_STATUS;
 
-extern uint8_t gAtEnableType;
-
 extern const uint32_t gDevFlashSize;
 
 /** @name the follow function need customer implement */
@@ -131,40 +110,11 @@ extern const uint32_t gDevFlashSize;
 /*@{*/
 
 /**
- * @brief  the AT Binary Log printf callback, must implement
- *
- * @param   ptr     the pointer of binary data
- * @param   len     the length of binary data
- */
-void AT_LOG(const uint8_t *ptr, size_t len);
-
-/**
- * @brief  the AT printf callback, must implement
- *
- * @param   str     the pointer of string to be printf output
- */
-void AT_Printf(const char *str);
-
-/**
- * @brief  the AT+TX command callback
- *
- * @param   forward    whether to forward this command.
- * @param   buf        the pointer of AT command string
- * @param   len        the length of AT command string
- *
- * return @see AT_STATUS
- */
-uint32_t AT_TxProcess(bool forward, uint8_t *buf, uint32_t len);
-
-/**
  * @brief  save customer configuration
- *
- * @param   data       the pointer of data buffer to to saved
- * @param   len        the length of data buffer to to saved
  *
  * return true if save successful else false.
  */
-bool Flash_WriteParam(uint32_t *data, uint32_t len);
+bool Flash_WriteParam(void);
 
 /*@}*/
 

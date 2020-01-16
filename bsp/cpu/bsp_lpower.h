@@ -15,6 +15,7 @@ Include Files
 ****/
 #include <stdbool.h>
 #include <stdint.h>
+#include "em_device.h"
 
 /**
  * @brief Chip lowpower mode initialization

@@ -14,15 +14,61 @@
 #include "mac/node/mac_radio.h"
 
 /****
+Global Variables
+****/
+osSemaphoreDef(debugSemaphore);
+#define DEBUG_SEM_NAME      osSemaphore(debugSemaphore)
+
+DeviceFlash_t  gDevFlash;
+
+struct global_param_t gParam = {
+    .dev        = {0},
+    .mainid     = NULL,
+    .appid      = NULL,
+    .mutex      = NULL,
+    .dtime      = 0,
+    .rst        = {0},
+    .mode       = 0,
+    .aswitch    = 1
+};
+
+/****
 Local Variables
 ****/
+
+static BSP_ADC_TypeDef sADCConfig;
 
 /* UART user callback */
 static void DebugCallback(uint32_t userData)
 {
-    gEnableRadioRx = false;
     BSP_LPowerStop();
-    /* TODO: add user RX code */
+    /* TODO: */
+}
+
+static void UserInitGPIO(void)
+{
+    stc_gpio_config_t gpioCfg;
+    DDL_ZERO_STRUCT(gpioCfg);
+
+    Sysctrl_SetPeripheralGate(SysctrlPeripheralGpio, TRUE);
+
+    gpioCfg.enDir = GpioDirIn;
+    gpioCfg.enPuPd = GpioPd;
+    Gpio_Init(AT_GPIO, AT_PIN, &gpioCfg);
+    Gpio_SetAfMode(AT_GPIO, AT_PIN, GpioAf0);
+
+    Gpio_Init(UKEY_GPIO, UKEY_PIN, &gpioCfg);
+    Gpio_SetAfMode(UKEY_GPIO, UKEY_PIN, GpioAf0);
+
+    /* IRQ on rising edge trigger */
+    EnableNvic(UKEY_PORT_IRQ, IrqLevel3, TRUE);
+    Gpio_EnableIrq(UKEY_GPIO, UKEY_PIN, GpioIrqRising);
+
+    /* unused GPIO diabled */
+    Gpio_Init(GpioPortA, GpioPin11, &gpioCfg);
+    Gpio_Init(GpioPortB, GpioPin3, &gpioCfg);
+    Gpio_Init(GpioPortB, GpioPin4, &gpioCfg);
+    Gpio_Init(GpioPortB, GpioPin6, &gpioCfg);
 }
 
 /****
@@ -34,7 +80,9 @@ Global Functions
  */
 void Gpio_IRQHandler(uint8_t u8Param)
 {
-    DevRadioIRQHandler(u8Param);
+    if(0 == u8Param) {
+        DevRadioIRQHandler(u8Param);
+    }
 
     /* User Key IRQ */
     if(1 == u8Param) {
@@ -56,54 +104,20 @@ void RadioDelay(uint32_t ms)
 }
 
 /* Ant control is empty implemetation to be compatible different designs */
-void RadioAntLowPower(uint8_t param){ }
-void RadioAntSwitch(uint8_t param) { }
+void RadioAntLowPower(uint8_t spiIdx, uint8_t status){ }
+void RadioAntSwitch(uint8_t spiIdx, uint8_t rxTx) { }
 
 /**
- * @brief user project special implemetation
+ * @brief user project special implementation
  * function declarations refer platform common definitions
  */
 void UserExternalGPIO(bool enable)
 {
-    stc_gpio_config_t gpioCfg;
-    DDL_ZERO_STRUCT(gpioCfg);
-
-    gpioCfg.enDir = GpioDirIn;
-    gpioCfg.enPuPd = GpioPd;
-    gpioCfg.enOD = GpioOdDisable;
-    gpioCfg.enDrv = GpioDrvL;
-    if(enable) {
-        Sysctrl_SetPeripheralGate(SysctrlPeripheralGpio, TRUE);
-        Gpio_Init(AT_GPIO, AT_PIN, &gpioCfg);
-        Gpio_SetAfMode(AT_GPIO, AT_PIN,  GpioAf0);
-        Gpio_Init(UKEY_GPIO, UKEY_PIN, &gpioCfg);
-        Gpio_SetAfMode(UKEY_GPIO, UKEY_PIN,  GpioAf0);
-
-        /* IRQ on rising edge trigger */
-        EnableNvic(UKEY_PORT_IRQ, IrqLevel3, TRUE);
-        Gpio_EnableIrq(UKEY_GPIO, UKEY_PIN, GpioIrqRising);
-
-        /* unused GPIO diabled */
-        Gpio_Init(GpioPortA, GpioPin11, &gpioCfg);
-        Gpio_Init(GpioPortA, GpioPin12, &gpioCfg);
-        Gpio_SetAfMode(GpioPortA, GpioPin11,  GpioAf0);
-        Gpio_SetAfMode(GpioPortA, GpioPin12,  GpioAf0);
-
-        Gpio_Init(GpioPortB, GpioPin3, &gpioCfg);
-        Gpio_Init(GpioPortB, GpioPin4, &gpioCfg);
-        Gpio_Init(GpioPortB, GpioPin6, &gpioCfg);
-        Gpio_SetAfMode(GpioPortB, GpioPin3,  GpioAf0);
-        Gpio_SetAfMode(GpioPortB, GpioPin4,  GpioAf0);
-        Gpio_SetAfMode(GpioPortB, GpioPin6,  GpioAf0);
-    } else {
-        /** @todo: */
-    }
+    /** @todo: */
 }
 
 bool UserDebugInit(bool reinit, uint32_t baudrateType, uint8_t pariType)
 {
-    bool success = false;
-
     BSP_UART_TypeDef uart = {
         .cb = DebugCallback,
         .gpio = DBG_GPIO,
@@ -111,7 +125,7 @@ bool UserDebugInit(bool reinit, uint32_t baudrateType, uint8_t pariType)
         .rx_pin = DBG_RX_PIN,
         .af = DBG_AF,
         .pd = GpioPu,
-        .num = DBG_UART_NUM,
+        .idx = DBG_UART_IDX,
         .bdtype = baudrateType,
         .pri = pariType
     };
@@ -123,7 +137,7 @@ bool UserDebugInit(bool reinit, uint32_t baudrateType, uint8_t pariType)
 
 void UserDebugWrite(const uint8_t *data, uint32_t len)
 {
-    BSP_UartSend(DBG_UART_NUM, data, len);
+    BSP_UartSend(DBG_UART_IDX, data, len);
 }
 
 /**
@@ -131,15 +145,17 @@ void UserDebugWrite(const uint8_t *data, uint32_t len)
  *  User should redefine config display function to reduce code size
  *  This function is called only by AT task.
  */
-void DevCfg_Display(void)
+void DevCfg_Display(uint8_t uartIdx)
 {
     rps_t rps = gDevFlash.config.rps;
     uint32_t freq  = gDevFlash.config.txfreq;
-    int8_t txpow = gDevFlash.config.txpow;
     char* bwstr = NULL;
-    char* ldrstr = NULL;
-    char* parstr = NULL;
+    uint8_t ldrtx = 0;
+    uint8_t ldrrx = 0;
+    int8_t txpow = gDevFlash.config.txpow;
     bool notAes = binIsTag(0x00, gDevFlash.config.appKey, 16);
+    ldrtx = (gDevFlash.config.rps.lowRate >> 2)&0x03;
+    ldrrx = gDevFlash.config.rps.lowRate&0x03;
 
     switch(rps.bw){
     case RF_BANDWIDTH_7D8:
@@ -177,35 +193,8 @@ void DevCfg_Display(void)
         break;
     }
 
-    switch(gDevFlash.config.rps.lowRate){
-    case LOWRATE_OP_AUTO:
-        ldrstr ="AUTO";
-        break;
-    case LOWRATE_OP_ON:
-        ldrstr ="ON";
-        break;
-    case LOWRATE_OP_OFF:
-        ldrstr ="OFF";
-        break;
-    default:
-        ldrstr ="UNKNOWN";
-        break;
-    }
-
-    switch(gDevFlash.config.prop.pari){
-    case UART_PARI_EVEN:
-        parstr = "Even";
-        break;
-    case UART_PARI_ODD:
-        parstr = "Odd";
-        break;
-    default:
-        parstr = "None";
-        break;
-    }
-
     /* Use RFO, limit power +14dBm */
-    if(gDevFlash.config.dtype & DTYPE_BITS_RFO){
+    if((gDevFlash.config.dtype >> TYPE_BITS_RFO) & 0x01){
         if(txpow > 14){
             txpow = 14;
         }
@@ -214,63 +203,86 @@ void DevCfg_Display(void)
             txpow = 2;
         }
     }
+
     osSaveCritical();
     osEnterCritical();
+
     printk("NET:\t%s\r\nTFREQ:\t%0.1fMHz\r\nRFREQ:\t%0.1fMHz\r\n",
            gDevFlash.config.prop.netmode ? "Node to Gateway":"Node to Node",
            (float)(freq/1e6),(float)(gDevFlash.config.rxfreq/1e6));
-    printk("POW:\t%udBm\r\nBW:\t%s\r\n"
-           "TSF:\t%u\r\nRSF:\t%u\r\nCR:\t4/%u\r\nMODE:\t%s\r\nSYNC:\t0x%X\r\n",
+
+    printk("POW:\t%ddBm\r\nBW:\t%s\r\n"
+           "TSF:\t%u\r\nRSF:\t%u\r\nCR:\t4/%u\r\nMODE:\t%s\r\nSYNC:\t0x%X\r\n"
+           "PREM:\t%u,%u\r\nFIX:\t%u,%u\r\nCRC:\t%s\r\nTIQ:\t%s\r\nRIQ:\t%s\r\n",
            txpow,bwstr,
            gDevFlash.config.txsf,gDevFlash.config.rxsf,rps.cr + 4,
            gDevFlash.config.rps.modem?"LORA":"FSK",
-           gDevFlash.config.syncword);
-    printk("PREM:\t%u,%u\r\nFIX:\t%u,%u\r\nCRC:\t%s\r\nTIQ:\t%s\r\nRIQ:\t%s\r\n",
+           gDevFlash.config.syncword,
            gDevFlash.config.tprem,gDevFlash.config.rprem,
            gDevFlash.config.tfix,gDevFlash.config.rfix,
            rps.crc?"ON":"OFF",
            gDevFlash.config.rps.tiq?"ON":"OFF",
            gDevFlash.config.rps.riq?"ON":"OFF");
+
     printk("SEQ:\t%s\r\nIP:\t%s\r\nAES:\t%s\r\nACK:\t%s\r\n"
-           "LDR:\t%s\r\nPAR:\t%s\r\n"
-           "LCP:\t%u\r\nLFT:\t%u\r\nFNB:\t0x%02X\r\nTYPE:\t0x%02X\r\n",
+           "LDR:\t%u,%u\r\nLCP:\t%u\r\nLFT:\t%u\r\n"
+           "FNB:\t0x%02X\r\nTYPE:\t0x%02X\r\nFlash:\t%u\r\n",
            gDevFlash.config.prop.seqMode?"ON":"OFF",
            gDevFlash.config.prop.ipMode?"ON":"OFF",
            notAes?"OFF":"ON",
-           gDevFlash.config.prop.ack?"ON":"OFF",ldrstr,parstr,
+           gDevFlash.config.prop.ack?"ON":"OFF",ldrtx,ldrrx,
            gDevFlash.config.lcp, gDevFlash.config.lftime,
            gDevFlash.config.fnb,
-           gDevFlash.config.dtype);
+           gDevFlash.config.dtype,gDevFlash.config.flash_err);
 
     osExitCritical();
     return;
 }
 
-void DevCfg_UserDefault(void)
+void DevCfg_UserDefault(uint8_t opts)
 {
-    /**
-     * Indicate if or not use RFO
-     *      false(0)  Use PA BOOST
-     *      true(1)   Use RFO
-     */
-    gDevFlash.config.dtype = 0;
 }
 
-void Dev_GetVol(void)
+bool DevCfg_UserUpdate(uint8_t *data, uint32_t len)
 {
-    /**
-     * NOTE:  you can wait a moment for measure VCC after execute TX, but you
-     *        should not be too long and must be less than TX Air Time.
-     *
-     * for example: Delay for a short time for radio TX work,
-     *              you can measure voltage at maximum power consumption
-     *        osDelayMs(5);
-     */
+    /** @todo: */
+    return true;
+}
 
-    /* voltage value */
-    BSP_ADC_Enable();
-    gParam.dev.vol = (3 * BSP_ADC_Sample(AdcAVccDiV3Input));
-    BSP_ADC_Disable();
+bool DevUserInit(void)
+{
+    bool success = false;
+
+    /* init default parameters */
+    memset(&sADCConfig, 0, sizeof(sADCConfig));
+
+    success = UserDebugInit(false, UART_BRATE_9600, UART_PARI_NONE);
+
+    UserInitGPIO();
+
+    return success;
+}
+
+void DevGetVol(uint32_t param1, uint16_t param2)
+{
+    uint32_t adc = 0;
+
+    /* Internal 2.5V voltage reference */
+    sADCConfig.ref = RefVolSelInBgr2p5;
+
+    BSP_ADC_Enable(&sADCConfig);
+    adc = 3 * BSP_ADC_Sample(0, AdcAVccDiV3Input);
+    /** example */
+    /*
+    adc = BSP_ADC_Sample(0, AdcExInputCH2);
+    adc = (adc*2500)/4096;
+    */
+    BSP_ADC_Disable(NULL);
+
+    gParam.dev.vol = (adc*2500)/4096;
+    gParam.dev.level = calc_level(16, MIN_VOL_LEVEL, MAX_VOL_LEVEL, gParam.dev.vol);
+    gParam.dev.res = adc/100;
+
 }
 
 /**
@@ -291,8 +303,13 @@ int printk(const char *fmt_s, ...)
     va_end(ap);
 
     if(result > 0){
-        BSP_UartSend(DBG_UART_NUM, (uint8_t *)outbuf, result);
+        BSP_UartSend(DBG_UART_IDX, (uint8_t *)outbuf, result);
     }
 
     return result;
+}
+
+void BSP_WatchdogFeed(void)
+{
+    /** @todo: */
 }

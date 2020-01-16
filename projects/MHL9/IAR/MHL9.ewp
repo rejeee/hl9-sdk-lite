@@ -786,7 +786,7 @@
         </option>
         <option>
           <name>IlinkAdditionalLibs</name>
-          <state>$PROJ_DIR$\..\..\..\libs\rjhl9.a</state>
+          <state>$PROJ_DIR$\..\..\..\libs\hl9-lite.a</state>
         </option>
         <option>
           <name>IlinkOverrideProgramEntryLabel</name>
@@ -1759,7 +1759,7 @@
         </option>
         <option>
           <name>IlinkAdditionalLibs</name>
-          <state>$PROJ_DIR$\..\..\..\libs\rjhl9.a</state>
+          <state>$PROJ_DIR$\..\..\..\libs\hl9-lite.a</state>
         </option>
         <option>
           <name>IlinkOverrideProgramEntryLabel</name>
@@ -1969,9 +1969,6 @@
             <group>
               <name>src</name>
               <file>
-                <name>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC\HC32L13X\driver\src\aes.c</name>
-              </file>
-              <file>
                 <name>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC\HC32L13X\driver\src\ddl.c</name>
               </file>
               <file>
@@ -2002,9 +1999,6 @@
                 <name>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC\HC32L13X\driver\src\sysctrl.c</name>
               </file>
               <file>
-                <name>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC\HC32L13X\driver\src\uart.c</name>
-              </file>
-              <file>
                 <name>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC\HC32L13X\driver\src\wdt.c</name>
               </file>
             </group>
@@ -2014,6 +2008,24 @@
     </group>
     <group>
       <name>platform</name>
+      <group>
+        <name>common</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\bsp\platform\common\dev.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\bsp\platform\common\dev_config.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\bsp\platform\common\dev_led.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\bsp\platform\common\dev_radio.h</name>
+        </file>
+      </group>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\bsp\platform\hl9.h</name>
+      </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\bsp\platform\platform.h</name>
       </file>
@@ -2109,10 +2121,13 @@
   <group>
     <name>User</name>
     <file>
-      <name>$PROJ_DIR$\..\app_at.c</name>
+      <name>$PROJ_DIR$\..\app_mac.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\app_project.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\platform_conf.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\platform_mhl9.c</name>

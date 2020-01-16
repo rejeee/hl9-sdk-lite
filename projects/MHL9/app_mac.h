@@ -1,20 +1,28 @@
-/*******************************************************************************
- * @file    app_at.h
- * @brief   AT Command task
+/******************************************************************************
+ * @file    app_mac.h
+ * @brief   the MAC task API
  *
  * @version 1.0.0
  *******************************************************************************
  * @license Refer License or other description Docs
  * @author  Felix
  ******************************************************************************/
-#ifndef APP_AT_H
-#define APP_AT_H
+#ifndef APP_MAC_H
+#define APP_MAC_H
 
+/****
+Include
+****/
 #include "platform/platform.h"
 
+/****
+Global Functions
+****/
+
 /**
- * @brief Initialize and Create AT task with DEBUG UART
+ * @brief  Create the MAC task
  */
-bool AppATTask(void);
+bool AppMacTask(void);
+void AppTaskManager(void);
 
 #endif

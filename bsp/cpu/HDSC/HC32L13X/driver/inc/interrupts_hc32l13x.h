@@ -83,6 +83,9 @@ typedef enum en_irq_level
     IrqLevel3  = 3u,               ///< 优先级3
 } en_irq_level_t; 
 
+void Gpio_IRQHandler(uint8_t u8Param);
+void LpUart_IRQHandler(uint8_t u8Param);
+void LpTim_IRQHandler(uint8_t u8Param);
 
 /******************************************************************************
  * Global function prototypes (definition in C source)

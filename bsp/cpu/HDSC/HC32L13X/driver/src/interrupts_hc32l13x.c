@@ -55,16 +55,16 @@
  ******************************************************************************/
 #include "ddl.h"
 #include "interrupts_hc32l13x.h"
-__WEAKDEF void Gpio_IRQHandler(uint8_t u8Param);
+//__WEAKDEF void Gpio_IRQHandler(uint8_t u8Param);
 __WEAKDEF void Dma_IRQHandler(uint8_t u8Param);
 __WEAKDEF void Uart_IRQHandler(uint8_t u8Param);
-__WEAKDEF void LpUart_IRQHandler(uint8_t u8Param);
+//__WEAKDEF void LpUart_IRQHandler(uint8_t u8Param);
 __WEAKDEF void Spi_IRQHandler(uint8_t u8Param);
 __WEAKDEF void I2c_IRQHandler(uint8_t u8Param);
 __WEAKDEF void Tim_IRQHandler(uint8_t u8Param);
 __WEAKDEF void Tim3_IRQHandler(uint8_t u8Param);
 __WEAKDEF void Adt_IRQHandler(uint8_t u8Param);
-__WEAKDEF void LpTim_IRQHandler(uint8_t u8Param);
+//__WEAKDEF void LpTim_IRQHandler(uint8_t u8Param);
 __WEAKDEF void Pca_IRQHandler(uint8_t u8Param);
 __WEAKDEF void Wdt_IRQHandler(uint8_t u8Param);
 __WEAKDEF void Vc_IRQHandler(uint8_t u8Param);

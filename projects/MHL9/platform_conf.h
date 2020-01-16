@@ -7,16 +7,18 @@
 extern "C" {
 #endif
 
+#define MIN_VOL_LEVEL   3000
+#define MAX_VOL_LEVEL   3600
+
 /**
  *  Debug Port Settings
  */
-#define DBG_UART_NUM            BSP_LPUART0
+#define DBG_UART_IDX            BSP_LPUART0
 #define DBG_GPIO                GpioPortB
 #define DBG_TX_PIN              GpioPin0    /* TX: PB00 */
 #define DBG_RX_PIN              GpioPin11   /* RX: PB11 */
 #define DBG_AF                  GpioAf3
 
-/* AT mode select, PB07 */
 #define AT_GPIO                 GpioPortB
 #define AT_PIN                  GpioPin7
 #define AT_HIGH()               Gpio_SetIO(AT_GPIO, AT_PIN)
@@ -30,10 +32,13 @@ extern "C" {
 /****
 Global Variables
 ****/
-extern BSP_OS_MQ        gUartQ;
-extern BSP_OS_MPOOL     gMemPool;
 
-void Dev_GetVol(void);
+/****
+Global Functions
+****/
+bool DevUserInit(void);
+
+void DevGetVol(uint32_t param1, uint16_t param2);
 
 #if defined(__cplusplus)
 }

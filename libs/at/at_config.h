@@ -19,6 +19,19 @@ Include Files
 Definitions
 ****/
 
+/**
+ *                show   scan  RFO  customized
+ *   |   7 (RFU)|  6  |  5  |  4  |   3~0    |
+ *
+ * Note:
+ *   4 bit:  0 PA Boost, 1 RFO
+ *   5 bit:  0 scan by level , 1 scan by cad
+ *   6 bit:  0 default , 1 show raw data
+ */
+#define TYPE_BITS_RFO            4
+#define TYPE_BITS_SCAN           5
+#define TYPE_BITS_RAW            6
+
 /** @name radio defines */
 /*@{*/
 
@@ -48,6 +61,13 @@ Definitions
 /** @brief Device address */
 typedef uint32_t devaddr_t;
 
+/** @brief Device LPWAN mode */
+enum {
+    NET_MODE_NONE     = 0U, /**< node to node, fix frequency */
+    NET_MODE_LOCAL,         /**< node to gateway, auto frequency */
+    NET_MODE_NUM,           /**< all mode number */
+};
+
 struct g_at_param_t {
     uint16_t    sleep_secs;     /**< sleep seconds    */
     uint8_t     rx_mode;        /**< indicate radio rx continue */
@@ -66,7 +86,7 @@ typedef struct
     uint32_t    modem   : 1;  /**> [0 FSK, 1 LORA ]                     */
     uint32_t    tiq     : 1;  /**> [0 OFF, 1 ON]                        */
     uint32_t    riq     : 1;  /**> [0 OFF, 1 ON]                        */
-    uint8_t     lowRate : 2;  /**> 0 AUTO, 1 ON, 2 OFF */
+    uint32_t    lowRate : 4;  /**> TLDR 2 | RLDR 2, 0 AUTO, 1 ON, 2 OFF */
 } rps_t;
 
 /**
@@ -77,9 +97,9 @@ typedef struct
 {
     uint32_t    ipMode  : 4;  /**> IP(Addr) mode: 0 no present */
     uint32_t    seqMode : 1;  /**> [0 OFF, 1 ON] */
-    uint8_t     netmode : 3;  /**> LPWA network protocol mode */
-    uint8_t     bdrate  : 4;  /**> UART baudrate type */
-    uint8_t     pari    : 2;  /**> 0 None, 1 Even, 2 Odd */
+    uint32_t    netmode : 3;  /**> LPWA network protocol mode */
+    uint32_t    bdrate  : 4;  /**> UART baudrate type */
+    uint32_t    pari    : 2;  /**> 0 None, 1 Even, 2 Odd */
     uint32_t    adr     : 1;  /**> [0 OFF, 1 ON] */
     uint32_t    ack     : 1;  /**> [0 OFF, 1 ON] */
 } prop_t;
@@ -107,7 +127,7 @@ struct device_flash_t {
     uint16_t    lcp;                      /**> unit second */
     uint16_t    lftime;                   /**> unit second */
     int8_t      txpow;
-    int8_t      txChan;                   /**> TX channel number */
+    uint8_t     repeat;                   /**> TX repeat times */
     uint8_t     txsf;
     uint8_t     rxsf;
     uint8_t     dtype;                    /**> data output format type */
@@ -117,6 +137,7 @@ struct device_flash_t {
     uint8_t     fnb;
     uint8_t     param[CFG_16BYTE_LEN];    /**> user parameters */
 
+    uint8_t     flash_err;                /**> flash error count */
     uint8_t     flash_ver;                /**> flash structure version */
 };
 
@@ -135,31 +156,5 @@ Glocal variables
 ****/
 extern DeviceFlash_t  gDevFlash;
 extern uint8_t gDevEUI[];
-extern struct g_at_param_t gDevRam;
-
-/****
-Global Functions
-****/
-
-/**
- * @brief  Set parameter into configuration from buf
- *
- * @param   cmd_type    the command byte to be read parameter
- * @param   buf         the pointer of parameter buffer
- * @param   len         the length of parameter buffer
- *
- * @return  @see AT_STATUS
- */
-uint32_t AtCfg_SetParam(uint8_t cmd_type, uint8_t *buf, uint8_t len);
-
-/**
- * @brief  Get parameter into buf from configuration
- *
- * @param   cmd_type    the command byte to be read parameter
- * @param   buf         the pointer of parameter buffer
- *
- * @return  the valid parameter length, if command is unknown, return 0
- */
-int AtCfg_GetParam(uint8_t cmd_type, uint8_t *buf);
 
 #endif
