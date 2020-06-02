@@ -119,10 +119,6 @@
       <TargetDriverDllRegistry>
         <SetRegEntry>
           <Number>0</Number>
-          <Key>DLGUARM</Key>
-        </SetRegEntry>
-        <SetRegEntry>
-          <Number>0</Number>
           <Key>ARMRTXEVENTFLAGS</Key>
           <Name>-L70 -Z18 -C0 -M0 -T1</Name>
         </SetRegEntry>
@@ -685,7 +681,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\HAL_CM.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\HAL_CM.c</PathWithFileName>
       <FilenameWithoutPath>HAL_CM.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -697,7 +693,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_CMSIS.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_CMSIS.c</PathWithFileName>
       <FilenameWithoutPath>rt_CMSIS.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -709,7 +705,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Event.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_Event.c</PathWithFileName>
       <FilenameWithoutPath>rt_Event.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -721,7 +717,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_List.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_List.c</PathWithFileName>
       <FilenameWithoutPath>rt_List.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -733,7 +729,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Mailbox.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_Mailbox.c</PathWithFileName>
       <FilenameWithoutPath>rt_Mailbox.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -745,7 +741,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_MemBox.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_MemBox.c</PathWithFileName>
       <FilenameWithoutPath>rt_MemBox.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -757,7 +753,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Memory.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_Memory.c</PathWithFileName>
       <FilenameWithoutPath>rt_Memory.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -769,7 +765,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Mutex.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_Mutex.c</PathWithFileName>
       <FilenameWithoutPath>rt_Mutex.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -781,7 +777,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Robin.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_Robin.c</PathWithFileName>
       <FilenameWithoutPath>rt_Robin.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -793,7 +789,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Semaphore.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_Semaphore.c</PathWithFileName>
       <FilenameWithoutPath>rt_Semaphore.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -805,7 +801,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_System.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_System.c</PathWithFileName>
       <FilenameWithoutPath>rt_System.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -817,7 +813,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Task.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_Task.c</PathWithFileName>
       <FilenameWithoutPath>rt_Task.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -829,7 +825,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Time.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_Time.c</PathWithFileName>
       <FilenameWithoutPath>rt_Time.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -841,7 +837,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Timer.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\rt_Timer.c</PathWithFileName>
       <FilenameWithoutPath>rt_Timer.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -850,7 +846,7 @@
 
   <Group>
     <GroupName>Kernel/RTX/Keil</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -861,7 +857,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\ARM\HAL_CM0.c</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\ARM\HAL_CM0.c</PathWithFileName>
       <FilenameWithoutPath>HAL_CM0.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -873,7 +869,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\kernel\CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s</PathWithFileName>
+      <PathWithFileName>..\..\..\kernel\RTX\SRC\ARM\SVC_Table.s</PathWithFileName>
       <FilenameWithoutPath>SVC_Table.s</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -922,7 +918,7 @@
 
   <Group>
     <GroupName>User</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -941,18 +937,6 @@
     <File>
       <GroupNumber>11</GroupNumber>
       <FileNumber>40</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\platform_mhl9.c</PathWithFileName>
-      <FilenameWithoutPath>platform_mhl9.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>11</GroupNumber>
-      <FileNumber>41</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -964,7 +948,7 @@
     </File>
     <File>
       <GroupNumber>11</GroupNumber>
-      <FileNumber>42</FileNumber>
+      <FileNumber>41</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -976,13 +960,25 @@
     </File>
     <File>
       <GroupNumber>11</GroupNumber>
-      <FileNumber>43</FileNumber>
+      <FileNumber>42</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\Listings\MHL9.map</PathWithFileName>
       <FilenameWithoutPath>MHL9.map</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>11</GroupNumber>
+      <FileNumber>43</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\platform.c</PathWithFileName>
+      <FilenameWithoutPath>platform.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

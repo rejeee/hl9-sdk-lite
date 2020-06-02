@@ -28,6 +28,15 @@ extern "C" {
 typedef void (*iap_func)(void);
 
 /**
+ * Radio SEM IDX
+ */
+typedef enum
+{
+    SEM_IDX_NORMAL = 0,
+    SEM_IDX_SCAN
+} SemIndex_t;
+
+/**
  * @brief the pointer of uart rx operation
  */
 struct sp_uart_t

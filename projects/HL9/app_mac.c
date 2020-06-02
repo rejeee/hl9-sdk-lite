@@ -129,7 +129,7 @@ void AppTaskManager(void)
 
 RadioIrqType_t RadioRxFinish(uint8_t spiIdx)
 {
-    struct sx127x_rx_t rxObj;
+    struct sx12xx_rx_t rxObj;
     RadioIrqType_t type_flag = RADIO_IRQ_UNKOWN;
     {
         rxObj.modem = gDevFlash.config.rps.modem;
@@ -150,3 +150,21 @@ RadioIrqType_t RadioRxFinish(uint8_t spiIdx)
     return type_flag;
 }
 
+void RadioCustomization(uint8_t spiIdx, bool tx, RadioSettings_t *ptr)
+{
+    /**
+     * This is a callback function before sending or receiving.
+     *
+     * You can modify the RF parameters dynamic adjustment of transceiver.
+     *
+     */
+
+    /* @todo */
+    /*
+    if(tx){
+        ptr->freq = USER_CFG_TFREQ;
+    } else {
+        ptr->freq = USER_CFG_RFREQ;
+    }
+    */
+}

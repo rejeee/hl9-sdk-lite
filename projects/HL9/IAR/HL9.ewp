@@ -3,29 +3,29 @@
 <project>
   <fileVersion>2</fileVersion>
   <configuration>
-    <name>M-HL9-Lite-TX</name>
+    <name>MHL9-TX</name>
     <toolchain>
       <name>ARM</name>
     </toolchain>
-    <debug>1</debug>
+    <debug>0</debug>
     <settings>
       <name>General</name>
       <archiveVersion>3</archiveVersion>
       <data>
         <version>24</version>
         <wantNonLocal>1</wantNonLocal>
-        <debug>1</debug>
+        <debug>0</debug>
         <option>
           <name>ExePath</name>
-          <state>M-HL9-Lite-TX\Exe</state>
+          <state>MHL9-TX\Exe</state>
         </option>
         <option>
           <name>ObjPath</name>
-          <state>M-HL9-Lite-TX\Obj</state>
+          <state>MHL9-TX\Obj</state>
         </option>
         <option>
           <name>ListPath</name>
-          <state>M-HL9-Lite-TX\List</state>
+          <state>MHL9-TX\List</state>
         </option>
         <option>
           <name>GEndianMode</name>
@@ -178,7 +178,7 @@
       <data>
         <version>31</version>
         <wantNonLocal>1</wantNonLocal>
-        <debug>1</debug>
+        <debug>0</debug>
         <option>
           <name>CCOptimizationNoSizeConstraints</name>
           <state>0</state>
@@ -187,6 +187,7 @@
           <name>CCDefines</name>
           <state>__CORTEX_M0</state>
           <state>__CMSIS_RTOS</state>
+          <state>NDEBUG</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -316,7 +317,7 @@
         <option>
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\..\..\..\kernel\CMSIS\Include</state>
-          <state>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\INC</state>
+          <state>$PROJ_DIR$\..\..\..\kernel\RTX\INC</state>
           <state>$PROJ_DIR$\..\..\..\bsp</state>
           <state>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC</state>
           <state>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC\HC32L13X</state>
@@ -324,8 +325,8 @@
           <state>$PROJ_DIR$\..\..\..\bsp\platform</state>
           <state>$PROJ_DIR$\..\..\..\bsp\platform\common</state>
           <state>$PROJ_DIR$\..\..\..\libs</state>
-          <state>$PROJ_DIR$\..\..\..\app</state>
           <state>$PROJ_DIR$\..\..\..\net</state>
+          <state>$PROJ_DIR$\..\..\..\app</state>
           <state>$PROJ_DIR$\..\config</state>
           <state>$PROJ_DIR$\..\</state>
         </option>
@@ -441,7 +442,7 @@
       <data>
         <version>9</version>
         <wantNonLocal>1</wantNonLocal>
-        <debug>1</debug>
+        <debug>0</debug>
         <option>
           <name>AObjPrefix</name>
           <state>1</state>
@@ -607,7 +608,7 @@
       <data>
         <version>1</version>
         <wantNonLocal>1</wantNonLocal>
-        <debug>1</debug>
+        <debug>0</debug>
         <option>
           <name>OOCOutputFormat</name>
           <version>3</version>
@@ -659,7 +660,7 @@
       <data>
         <version>17</version>
         <wantNonLocal>1</wantNonLocal>
-        <debug>1</debug>
+        <debug>0</debug>
         <option>
           <name>IlinkOutputFile</name>
           <state>$PROJ_FNAME$.out</state>
@@ -953,7 +954,7 @@
       <data>
         <version>0</version>
         <wantNonLocal>1</wantNonLocal>
-        <debug>1</debug>
+        <debug>0</debug>
         <option>
           <name>IarchiveInputs</name>
           <state></state>
@@ -975,29 +976,29 @@
     </settings>
   </configuration>
   <configuration>
-    <name>M-HL9-Lite-RX</name>
+    <name>MHL9-RX</name>
     <toolchain>
       <name>ARM</name>
     </toolchain>
-    <debug>1</debug>
+    <debug>0</debug>
     <settings>
       <name>General</name>
       <archiveVersion>3</archiveVersion>
       <data>
         <version>24</version>
         <wantNonLocal>1</wantNonLocal>
-        <debug>1</debug>
+        <debug>0</debug>
         <option>
           <name>ExePath</name>
-          <state>M-HL9-Lite-RX\Exe</state>
+          <state>MHL9-RX\Exe</state>
         </option>
         <option>
           <name>ObjPath</name>
-          <state>M-HL9-Lite-RX\Obj</state>
+          <state>MHL9-RX\Obj</state>
         </option>
         <option>
           <name>ListPath</name>
-          <state>M-HL9-Lite-RX\List</state>
+          <state>MHL9-RX\List</state>
         </option>
         <option>
           <name>GEndianMode</name>
@@ -1150,7 +1151,7 @@
       <data>
         <version>31</version>
         <wantNonLocal>1</wantNonLocal>
-        <debug>1</debug>
+        <debug>0</debug>
         <option>
           <name>CCOptimizationNoSizeConstraints</name>
           <state>0</state>
@@ -1159,6 +1160,7 @@
           <name>CCDefines</name>
           <state>__CORTEX_M0</state>
           <state>__CMSIS_RTOS</state>
+          <state>NDEBUG</state>
           <state>USE_MODE_RX</state>
         </option>
         <option>
@@ -1289,7 +1291,7 @@
         <option>
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\..\..\..\kernel\CMSIS\Include</state>
-          <state>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\INC</state>
+          <state>$PROJ_DIR$\..\..\..\kernel\RTX\INC</state>
           <state>$PROJ_DIR$\..\..\..\bsp</state>
           <state>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC</state>
           <state>$PROJ_DIR$\..\..\..\bsp\cpu\HDSC\HC32L13X</state>
@@ -1414,7 +1416,7 @@
       <data>
         <version>9</version>
         <wantNonLocal>1</wantNonLocal>
-        <debug>1</debug>
+        <debug>0</debug>
         <option>
           <name>AObjPrefix</name>
           <state>1</state>
@@ -1580,7 +1582,7 @@
       <data>
         <version>1</version>
         <wantNonLocal>1</wantNonLocal>
-        <debug>1</debug>
+        <debug>0</debug>
         <option>
           <name>OOCOutputFormat</name>
           <version>3</version>
@@ -1632,7 +1634,7 @@
       <data>
         <version>17</version>
         <wantNonLocal>1</wantNonLocal>
-        <debug>1</debug>
+        <debug>0</debug>
         <option>
           <name>IlinkOutputFile</name>
           <state>$PROJ_FNAME$.out</state>
@@ -1926,7 +1928,7 @@
       <data>
         <version>0</version>
         <wantNonLocal>1</wantNonLocal>
-        <debug>1</debug>
+        <debug>0</debug>
         <option>
           <name>IarchiveInputs</name>
           <state></state>
@@ -2056,53 +2058,53 @@
       <group>
         <name>IAR</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\IAR\HAL_CM0.s</name>
+          <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\IAR\HAL_CM0.s</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\IAR\SVC_Table.s</name>
+          <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\IAR\SVC_Table.s</name>
         </file>
       </group>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\HAL_CM.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\HAL_CM.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_CMSIS.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_CMSIS.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Event.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_Event.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_List.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_List.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Mailbox.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_Mailbox.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_MemBox.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_MemBox.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Memory.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_Memory.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Mutex.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_Mutex.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Robin.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_Robin.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Semaphore.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_Semaphore.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_System.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_System.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Task.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_Task.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Time.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_Time.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\kernel\CMSIS\RTOS\RTX\SRC\rt_Timer.c</name>
+        <name>$PROJ_DIR$\..\..\..\kernel\RTX\SRC\rt_Timer.c</name>
       </file>
     </group>
   </group>
@@ -2127,10 +2129,10 @@
       <name>$PROJ_DIR$\..\app_project.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\platform_conf.h</name>
+      <name>$PROJ_DIR$\..\platform.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\platform_mhl9.c</name>
+      <name>$PROJ_DIR$\..\platform_conf.h</name>
     </file>
   </group>
 </project>
