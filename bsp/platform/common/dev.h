@@ -81,7 +81,7 @@ uint32_t PlatformSleep(uint32_t secs);
 bool PlatformSleepMs(uint32_t ms);
 
 /**
- * @TODO:The following code must be implement by the user
+ * @FIXME:The following code should be customized by the user
  */
 
 /**
@@ -91,9 +91,6 @@ bool PlatformSleepMs(uint32_t ms);
  */
 void UserExternalGPIO(bool enable);
 
-/**
- * @FIXME:The following code should be customized by the user
- */
 void UserGpioUnused(void);
 
 /**
